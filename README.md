@@ -22,7 +22,7 @@ data-only container and link to it when running scrapyd:
 
 ```
 $ docker run -v /var/lib/scrapyd -v /var/log/scrapyd -name scraped-data busybox true
-$ docker run -p 6800 --volumes-from scraped-data scrapyd
+$ docker run -p 6800 -volumes-from scraped-data scrapyd
 ```
 
 Now you can rebuild/update the `scrapyd` image and container without
