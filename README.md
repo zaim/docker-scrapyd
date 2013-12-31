@@ -1,7 +1,7 @@
 docker-scrapyd
 ==============
 
-Dockerfile for building an image that runs scrapyd
+Dockerfile for building an image that runs [scrapyd](http://scrapyd.readthedocs.org/).
 
 Building
 --------
