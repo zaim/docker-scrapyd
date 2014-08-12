@@ -1,25 +1,19 @@
 # Dockerfile for scraypd
 # http://scrapyd.readthedocs.org/en/latest/
 
-FROM ubuntu:precise
+FROM stackbrew/ubuntu:14.04
 MAINTAINER Zaim Bakar <hi.zaimapps@gmail.com>
 
-# Update APT cache
-RUN sed -i.bak 's/main$/main universe/' /etc/apt/sources.list
-RUN apt-get update
-RUN apt-get upgrade -y
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 627220E7
+RUN echo 'deb http://archive.scrapy.org/ubuntu scrapy main' > /etc/apt/sources.list.d/scrapy.list
 
-# Add scrapy APT repository
-ADD http://archive.scrapy.org/ubuntu/archive.key /tmp/scrapy.key
-RUN apt-key add /tmp/scrapy.key
-RUN echo "deb http://archive.scrapy.org/ubuntu precise main" > /etc/apt/sources.list.d/scrapy.list
-RUN apt-get update
-
-# Install scrapyd
-RUN apt-get install -y scrapyd
+RUN apt-get update -qq && apt-get install -y scrapyd
 
 # Expose scrapyd default port
 EXPOSE 6800
 
+VOLUME ["/var/lib/scrapyd"]
+VOLUME ["/var/log/scrapyd"]
+
 # Set scrapyd as run entrypoint
-ENTRYPOINT ["/usr/bin/scrapyd"]
+CMD ["/usr/bin/scrapyd"]
