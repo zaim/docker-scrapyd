@@ -15,6 +15,7 @@ RUN apt-key add /tmp/scrapy.key
 
 #Add scrapyd public key 
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7AECB5E990E2741A
+RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 627220E7
 RUN echo "deb http://archive.scrapy.org/ubuntu precise main" > /etc/apt/sources.list.d/scrapy.list
 RUN apt-get update
 
