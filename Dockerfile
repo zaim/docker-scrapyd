@@ -26,7 +26,7 @@ RUN apt-get install -y wget
 RUN apt-get install -y python-setuptools
 
 # Install pip
-RUN wget https://bootstrap.pypa.io/get-pip.py -O - | python
+RUN wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py -O - | python
 
 # Install scrapyd
 RUN apt-get install -y scrapyd
