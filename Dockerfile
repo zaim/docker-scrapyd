@@ -25,8 +25,24 @@ RUN apt-get install -y wget
 # Install setuptools
 RUN apt-get install -y python-setuptools
 
+#Install gcc
+RUN apt-get install -y gcc
+
+#Install python2.7-dev
+RUN apt-get install -y python2.7-dev
+
+#Install libxml and libxslt
+RUN apt-get install -y libffi-dev
+RUN apt-get install -y libxml2-dev
+RUN apt-get install -y libxslt1-dev
+
 # Install pip
 RUN wget --no-check-certificate https://bootstrap.pypa.io/get-pip.py -O - | python
+
+RUN pip install redis
+RUN pip install scrapy-redis
+# Install scrapy
+RUN apt-get install -y scrapy-0.24
 
 # Install scrapyd
 RUN apt-get install -y scrapyd
