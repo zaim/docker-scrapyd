@@ -1,7 +1,7 @@
 docker-scrapyd
 ==============
 
-Dockerfile for building an image that runs scrapyd
+Dockerfile for building an image that runs [scrapyd](http://scrapyd.readthedocs.org/).
 
 Building
 --------
@@ -17,11 +17,13 @@ Running
 $ docker run -p 6800 scrapyd
 ```
 
-If you want to persist logs or scraped items export files, add a volume
-to `/var/log/scrapyd` and `var/lib/scrapyd`:
+If you want to persist logs or scraped items export files, create a
+data-only container and link to it when running scrapyd:
 
 ```
-$ docker run -p 6800 -v [hostpath]/lib:/var/lib/scrapyd -v [hostpath]/log:/var/log/scrapyd scrapyd
+$ docker run -v /var/lib/scrapyd -v /var/log/scrapyd -name scraped-data busybox true
+$ docker run -p 6800 -volumes-from scraped-data scrapyd
 ```
 
-Replace [hostpath] with an absolute path to a directory in your host machine.
+Now you can rebuild/update the `scrapyd` image and container without
+destroying any scraped data.
